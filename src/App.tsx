@@ -3,6 +3,7 @@ import { ResultPeoople, People } from "interfaces/interface";
 import Search from "./components/Search/Search.tsx";
 import { searchAPI } from "./api/api";
 import Loader from "./components/Loader/Loader.tsx";
+import ContentBlock from "./components/ContentBlock/ContentBlock.tsx";
 import "./App.css";
 
 interface StateApp {
@@ -39,6 +40,7 @@ class App extends PureComponent {
     return (
       <>
         <Search getItems={(search?: string) => this.getItems(search)} />
+        <ContentBlock people={this.state.people} />
         {loading && <Loader />}
       </>
     );
