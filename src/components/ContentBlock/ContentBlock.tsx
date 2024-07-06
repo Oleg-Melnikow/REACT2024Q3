@@ -1,7 +1,8 @@
 import { PureComponent, ReactNode } from "react";
 import { People } from "interfaces/interface";
-import style from "./ContentBlock.module.scss";
 import Card from "../Card/Card.tsx";
+import NotContent from "../NotContent/NotContent.tsx";
+import style from "./ContentBlock.module.scss";
 
 interface ContentProps {
   people: People[];
@@ -18,7 +19,7 @@ class ContentBlock extends PureComponent<ContentProps> {
             ))}
           </div>
         ) : (
-          <div>not content</div>
+          <NotContent />
         )}
       </main>
     );

@@ -27,6 +27,7 @@
 
     "paths": {
       "interface/*": ["interface/*"],
+      "assets/*": ["assets/*"],
     }
   },
   "include": ["src"]

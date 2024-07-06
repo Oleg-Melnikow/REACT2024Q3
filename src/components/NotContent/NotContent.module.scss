@@ -1,0 +1,20 @@
+.notFound {
+  width: 50%;
+  margin: 20px auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 15px;
+  padding: 1rem;
+  align-items: center;
+  font-size: 1.25rem;
+  background: rgba(11, 11, 11, 0.5);
+  gap: 5px;
+  img {
+    height: 30px;
+  }
+  p {
+    color: #ffc107;
+    margin: 0;
+  }
+}

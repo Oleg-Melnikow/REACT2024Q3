@@ -8,6 +8,7 @@ export default defineConfig({
   resolve: {
     alias: {
       interface: `${path.resolve(__dirname, "./src/interface/")}`,
+      assets: `${path.resolve(__dirname, "./src/assets/")}`,
     },
   },
 });
