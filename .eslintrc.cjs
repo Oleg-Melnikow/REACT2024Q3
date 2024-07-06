@@ -17,7 +17,7 @@ module.exports = {
       version: "detect",
     },
   },
-  ignorePatterns: ["dist", ".eslintrc.cjs"],
+  ignorePatterns: ["dist", ".eslintrc.cjs", "vite.config.ts"],
   parser: "@typescript-eslint/parser",
   parserOptions: {
     ecmaVersion: "latest",
@@ -45,6 +45,9 @@ module.exports = {
     "@typescript-eslint/explicit-function-return-type": "error",
     "@typescript-eslint/no-unnecessary-type-assertion": "error",
     "react/no-array-index-key": "error",
+    "import/prefer-default-export": "off",
+    "import/no-extraneous-dependencies": "off",
+    "@typescript-eslint/no-floating-promises": "off",
     "react/react-in-jsx-scope": "off",
     "class-methods-use-this": "off",
     "react/require-default-props": "error",
