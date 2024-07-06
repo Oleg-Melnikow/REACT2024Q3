@@ -1,6 +1,6 @@
 import { PureComponent, ReactNode } from "react";
+import { ResultPeoople, People } from "interfaces/interface";
 import Search from "./components/Search/Search.tsx";
-import { ResultPeoople, People } from "./interfaces/interface";
 import { searchAPI } from "./api/api";
 import Loader from "./components/Loader/Loader.tsx";
 import "./App.css";
@@ -38,7 +38,7 @@ class App extends PureComponent {
     const { loading } = this.state;
     return (
       <>
-        <Search />
+        <Search getItems={(search?: string) => this.getItems(search)} />
         {loading && <Loader />}
       </>
     );

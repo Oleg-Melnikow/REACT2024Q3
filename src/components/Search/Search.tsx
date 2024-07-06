@@ -1,4 +1,4 @@
-import { ChangeEvent, Component, ReactNode } from "react";
+import { ChangeEvent, PureComponent, ReactNode } from "react";
 import style from "./Search.module.scss";
 import Button from "../Button/Button.tsx";
 
@@ -6,14 +6,18 @@ interface InputState {
   searchValue: string;
 }
 
-class Search extends Component {
+interface SearchProps {
+  getItems: (search?: string) => Promise<void>;
+}
+
+class Search extends PureComponent<SearchProps> {
   state: InputState = {
     searchValue: "",
   };
 
   searchInput(): void {
     localStorage.setItem("search", this.state.searchValue);
-    console.log(this.state.searchValue);
+    this.props.getItems(this.state.searchValue);
   }
 
   onChangeInput(event: ChangeEvent<HTMLInputElement>): void {
