@@ -1,0 +1,35 @@
+.card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  word-wrap: break-word;
+  background-color: #fff;
+  background-clip: border-box;
+  border: 1px solid rgba(0, 0, 0, 0.125);
+  border-radius: 0.25rem;
+  color: red;
+  width: 270px;
+  background: url("../../assets/bg-species.jpg") center / cover fixed no-repeat;
+}
+
+.cardHeader {
+  background-color: rgba(0, 0, 0, 0.03);
+  border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+.cardTitlte {
+  font-size: 24px;
+  font-weight: 500;
+  line-height: 1.2;
+  margin: 0;
+  padding: 10px;
+}
+
+.cardBody {
+  flex: 1 1 auto;
+  padding: 10px;
+  p {
+    font-size: 20px;
+    margin: 0;
+  }
+}
