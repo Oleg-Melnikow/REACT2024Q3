@@ -9,15 +9,17 @@ import "./App.css";
 interface StateApp {
   people: People[];
   loading: boolean;
+  error: boolean;
 }
 
 class App extends PureComponent {
   state: StateApp = {
     people: [],
     loading: true,
+    error: false,
   };
 
-  async getItems(search?: string): Promise<void> {
+  getItems = async (search?: string): Promise<void> => {
     this.setState({ loading: true });
     try {
       const result = search
@@ -28,19 +30,26 @@ class App extends PureComponent {
     } catch (e) {
       console.log(e);
     }
-  }
+  };
 
   async componentDidMount(): Promise<void> {
     const item = localStorage.getItem("search") ?? "";
     await this.getItems(item);
   }
 
+  onError = (): void => {
+    this.setState({ error: true });
+  };
+
   render(): ReactNode {
-    const { loading } = this.state;
+    const { loading, people } = this.state;
+    if (this.state.error) {
+      throw new Error("App was crashed!");
+    }
     return (
       <>
-        <Search getItems={(search?: string) => this.getItems(search)} />
-        <ContentBlock people={this.state.people} />
+        <Search getItems={this.getItems} onError={this.onError} />
+        <ContentBlock people={people} />
         {loading && <Loader />}
       </>
     );

@@ -8,6 +8,7 @@ interface InputState {
 
 interface SearchProps {
   getItems: (search?: string) => Promise<void>;
+  onError: () => void;
 }
 
 class Search extends PureComponent<SearchProps> {
@@ -16,8 +17,9 @@ class Search extends PureComponent<SearchProps> {
   };
 
   searchInput(): void {
-    localStorage.setItem("search", this.state.searchValue);
-    this.props.getItems(this.state.searchValue);
+    const search = this.state.searchValue.trim();
+    localStorage.setItem("search", search);
+    this.props.getItems(search);
   }
 
   onChangeInput(event: ChangeEvent<HTMLInputElement>): void {
@@ -46,6 +48,7 @@ class Search extends PureComponent<SearchProps> {
             title="Search"
             isDisabled={!this.state.searchValue.length}
           />
+          <Button onClick={this.props.onError} title="Error" />
         </div>
       </header>
     );
