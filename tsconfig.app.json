@@ -28,6 +28,8 @@
     "paths": {
       "interface/*": ["interface/*"],
       "assets/*": ["assets/*"],
+      "api/*": ["api/*"],
+      "components/*": ["components/*"],
     }
   },
   "include": ["src"]
