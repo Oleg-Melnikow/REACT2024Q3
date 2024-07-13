@@ -50,7 +50,7 @@ module.exports = {
     "@typescript-eslint/no-floating-promises": "off",
     "react/react-in-jsx-scope": "off",
     "class-methods-use-this": "off",
-    "react/require-default-props": "error",
+    "react/require-default-props": "off",
     semi: ["error", "always"],
   },
 };

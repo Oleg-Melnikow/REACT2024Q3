@@ -1,4 +1,4 @@
-import { PureComponent, ReactNode } from "react";
+import { ReactElement } from "react";
 import { People } from "interfaces/interface";
 import Card from "../Card/Card.tsx";
 import NotContent from "../NotContent/NotContent.tsx";
@@ -8,22 +8,20 @@ interface ContentProps {
   people: People[];
 }
 
-class ContentBlock extends PureComponent<ContentProps> {
-  render(): ReactNode {
-    return (
-      <main className={style.content}>
-        {this.props.people.length ? (
-          <div className={style.items}>
-            {this.props.people.map((person) => (
-              <Card key={person.name} person={person} />
-            ))}
-          </div>
-        ) : (
-          <NotContent />
-        )}
-      </main>
-    );
-  }
+function ContentBlock({ people }: ContentProps): ReactElement {
+  return (
+    <main className={style.content}>
+      {people.length ? (
+        <div className={style.items}>
+          {people.map((person) => (
+            <Card key={person.name} person={person} />
+          ))}
+        </div>
+      ) : (
+        <NotContent />
+      )}
+    </main>
+  );
 }
 
 export default ContentBlock;
