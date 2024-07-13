@@ -1,3 +1,5 @@
+@use "src/index" as main;
+
 .header {
   width: 100%;
   background: #aaa;
@@ -7,10 +9,8 @@
 .search {
   max-width: 1280px;
   height: 100%;
-  display: flex;
+  @include main.flex;
   flex-direction: row;
-  justify-content: center;
-  align-items: center;
   margin: 0 auto;
   gap: 10px;
   input {
@@ -27,8 +27,8 @@
   }
 }
 
-@media (max-width: 440px) {
+@media (max-width: 500px) {
   .search input {
-    min-width: calc(100% - 110px);
+    min-width: calc(100% - 200px);
   }
 }

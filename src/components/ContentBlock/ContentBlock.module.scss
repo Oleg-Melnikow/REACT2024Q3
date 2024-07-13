@@ -1,3 +1,5 @@
+@use "src/index" as main;
+
 .content {
   width: 100%;
   min-height: calc(100vh - 60px);
@@ -8,10 +10,8 @@
   max-width: 1280px;
   margin: 0 auto;
   padding: 10px;
-  display: flex;
+  @include main.flex;
   flex-direction: row;
   flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
   gap: 10px;
 }
