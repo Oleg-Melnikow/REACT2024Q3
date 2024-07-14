@@ -44,17 +44,13 @@ export function AppProvider({ children }: AppProviderProps): ReactElement {
   }, []);
 
   const getPerson = useCallback(
-    async (id?: string): Promise<void> => {
+    async (id: string): Promise<void> => {
       dispatch(loading(true));
       try {
-        if (id) {
-          const result = await searchAPI.getPeople(id);
-          const person = result.data as People;
-          dispatch(setCurrentPerson(person));
-          navigate(`/details/${id}${search}`);
-        } else {
-          dispatch(setCurrentPerson(null));
-        }
+        const result = await searchAPI.getPeople(id);
+        const person = result.data as People;
+        dispatch(setCurrentPerson(person));
+        navigate(`/details/${id}${search}`);
       } catch (e) {
         console.log(e);
       } finally {
@@ -68,9 +64,14 @@ export function AppProvider({ children }: AppProviderProps): ReactElement {
     dispatch(chnageIsError(isError));
   }, []);
 
+  const resetDetails = useCallback((): void => {
+    dispatch(setCurrentPerson(null));
+    navigate(`/${search}`);
+  }, [navigate, search]);
+
   const contextValue = useMemo(
-    () => ({ ...state, getItems, setIsError, getPerson }),
-    [state, setIsError, getItems, getPerson]
+    () => ({ ...state, getItems, setIsError, getPerson, resetDetails }),
+    [state, setIsError, getItems, getPerson, resetDetails]
   );
 
   return (

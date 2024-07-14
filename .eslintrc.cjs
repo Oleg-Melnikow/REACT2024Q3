@@ -52,6 +52,7 @@ module.exports = {
     "class-methods-use-this": "off",
     "react/require-default-props": "off",
     "react/display-name": "off",
+    "react-hooks/exhaustive-deps": "off",
     semi: ["error", "always"],
   },
 };

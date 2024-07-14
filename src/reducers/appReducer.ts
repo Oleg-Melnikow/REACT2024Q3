@@ -65,8 +65,9 @@ type ActionsType =
 
 export interface AppContextValue extends AppStateType {
   getItems: (searchValue?: string) => Promise<void>;
-  getPerson: (id?: string) => Promise<void>;
+  getPerson: (id: string) => Promise<void>;
   setIsError: (isError: boolean) => void;
+  resetDetails: () => void;
 }
 
 export const AppContext = createContext<AppContextValue>({
@@ -74,4 +75,5 @@ export const AppContext = createContext<AppContextValue>({
   getItems: () => Promise.resolve(),
   getPerson: () => Promise.resolve(),
   setIsError: () => {},
+  resetDetails: () => {},
 });

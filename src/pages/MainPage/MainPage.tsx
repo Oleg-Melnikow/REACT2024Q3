@@ -2,21 +2,23 @@ import { ReactElement, useEffect } from "react";
 import Search from "components/Search/Search";
 import Loader from "components/Loader/Loader";
 import ContentBlock from "components/ContentBlock/ContentBlock";
-import { useLocation, useSearchParams } from "react-router-dom";
+import { Outlet, useLocation, useSearchParams } from "react-router-dom";
 import useApp from "hooks/useApp";
 
 function MainPage(): ReactElement {
-  const { search } = useLocation();
+  const { search, pathname } = useLocation();
   const [searchParams, setSearchParams] = useSearchParams();
-  const { getItems, isLoading, isError } = useApp();
+  const { getItems, isLoading, isError, resetDetails } = useApp();
 
   useEffect(() => {
     const item = localStorage.getItem("search") ?? "";
     if (item && !searchParams.size) {
       setSearchParams({ search: item });
     }
-    getItems(search || `?search=${item}` || "");
-  }, [getItems, search, searchParams.size, setSearchParams]);
+    if (!pathname.includes("details")) {
+      getItems(search || `?search=${item}` || "");
+    }
+  }, [getItems, pathname, search, searchParams.size, setSearchParams]);
 
   if (isError) {
     throw new Error("App was crashed!");
@@ -24,9 +26,15 @@ function MainPage(): ReactElement {
 
   return (
     <>
-      <Search />
-      <ContentBlock />
-      {isLoading && <Loader />}
+      <div className="app">
+        {pathname.includes("details") && (
+          <div onClick={resetDetails} className="blocked" />
+        )}
+        <Search />
+        <ContentBlock />
+        {isLoading && <Loader />}
+      </div>
+      <Outlet />
     </>
   );
 }
