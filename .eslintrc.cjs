@@ -51,6 +51,7 @@ module.exports = {
     "react/react-in-jsx-scope": "off",
     "class-methods-use-this": "off",
     "react/require-default-props": "off",
+    "react/display-name": "off",
     semi: ["error", "always"],
   },
 };
