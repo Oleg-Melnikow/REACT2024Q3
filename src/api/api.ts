@@ -11,4 +11,7 @@ export const searchAPI = {
   async searchItems(search: string): Promise<AxiosResponse> {
     return instance.get(`/people${search}`);
   },
+  async getPeople(id: string): Promise<AxiosResponse> {
+    return instance.get(`/people/${id}`);
+  },
 };

@@ -13,6 +13,7 @@ export default defineConfig({
       components: `${path.resolve(__dirname, "./src/components/")}`,
       hooks: `${path.resolve(__dirname, "./src/hooks/")}`,
       reducers: `${path.resolve(__dirname, "./src/reducers/")}`,
+      helpers: `${path.resolve(__dirname, "./src/helpers/")}`,
     },
   },
 });

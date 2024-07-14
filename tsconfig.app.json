@@ -32,6 +32,7 @@
       "components/*": ["components/*"],
       "hooks/*": ["hooks/*"],
       "reducers/*": ["reducers/*"],
+      "helpers/*": ["helpers/*"],
     }
   },
   "include": ["src"]

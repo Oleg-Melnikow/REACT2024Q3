@@ -1,9 +1,10 @@
-import { GetPeopleData } from "interfaces/interface";
+import { GetPeopleData, People } from "interfaces/interface";
 import { createContext } from "react";
 
 export interface AppStateType extends GetPeopleData {
   isLoading: boolean;
   isError: boolean;
+  currentPerson: People | null;
 }
 
 export const AppInitialState: AppStateType = {
@@ -12,6 +13,7 @@ export const AppInitialState: AppStateType = {
   isError: false,
   count: 0,
   isPagination: false,
+  currentPerson: null,
 };
 
 export const appReducer = (
@@ -21,6 +23,7 @@ export const appReducer = (
   switch (action.type) {
     case "app/StarWars/SET-IS-LOADING":
     case "app/StarWars/GET-DATA-PEOPLE":
+    case "app/StarWars/SET-CURRENT-PERSON":
       return {
         ...state,
         ...action.payload,
@@ -48,18 +51,27 @@ export const chnageIsError = (isError: boolean) =>
     payload: { isError },
   }) as const;
 
+export const setCurrentPerson = (currentPerson: People | null) =>
+  ({
+    type: "app/StarWars/SET-CURRENT-PERSON",
+    payload: { currentPerson },
+  }) as const;
+
 type ActionsType =
   | ReturnType<typeof loading>
   | ReturnType<typeof getDataPeople>
-  | ReturnType<typeof chnageIsError>;
+  | ReturnType<typeof chnageIsError>
+  | ReturnType<typeof setCurrentPerson>;
 
 export interface AppContextValue extends AppStateType {
   getItems: (searchValue?: string) => Promise<void>;
+  getPerson: (id?: string) => Promise<void>;
   setIsError: (isError: boolean) => void;
 }
 
 export const AppContext = createContext<AppContextValue>({
   ...AppInitialState,
   getItems: () => Promise.resolve(),
+  getPerson: () => Promise.resolve(),
   setIsError: () => {},
 });

@@ -1,5 +1,5 @@
 import { searchAPI } from "api/api";
-import { ResultPeoople } from "interfaces/interface";
+import { People, ResultPeoople } from "interfaces/interface";
 import {
   ReactElement,
   ReactNode,
@@ -7,6 +7,7 @@ import {
   useMemo,
   useReducer,
 } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import {
   AppContext,
   AppInitialState,
@@ -14,6 +15,7 @@ import {
   chnageIsError,
   getDataPeople,
   loading,
+  setCurrentPerson,
 } from "reducers/appReducer";
 
 interface AppProviderProps {
@@ -22,6 +24,8 @@ interface AppProviderProps {
 
 export function AppProvider({ children }: AppProviderProps): ReactElement {
   const [state, dispatch] = useReducer(appReducer, AppInitialState);
+  const navigate = useNavigate();
+  const { search } = useLocation();
 
   const getItems = useCallback(async (searchValue?: string): Promise<void> => {
     dispatch(loading(true));
@@ -39,13 +43,34 @@ export function AppProvider({ children }: AppProviderProps): ReactElement {
     }
   }, []);
 
+  const getPerson = useCallback(
+    async (id?: string): Promise<void> => {
+      dispatch(loading(true));
+      try {
+        if (id) {
+          const result = await searchAPI.getPeople(id);
+          const person = result.data as People;
+          dispatch(setCurrentPerson(person));
+          navigate(`/details/${id}${search}`);
+        } else {
+          dispatch(setCurrentPerson(null));
+        }
+      } catch (e) {
+        console.log(e);
+      } finally {
+        dispatch(loading(false));
+      }
+    },
+    [navigate, search]
+  );
+
   const setIsError = useCallback((isError: boolean): void => {
     dispatch(chnageIsError(isError));
   }, []);
 
   const contextValue = useMemo(
-    () => ({ ...state, getItems, setIsError }),
-    [state, setIsError, getItems]
+    () => ({ ...state, getItems, setIsError, getPerson }),
+    [state, setIsError, getItems, getPerson]
   );
 
   return (
