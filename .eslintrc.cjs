@@ -17,7 +17,13 @@ module.exports = {
       version: "detect",
     },
   },
-  ignorePatterns: ["dist", ".eslintrc.cjs", "vite.config.ts"],
+  ignorePatterns: [
+    "dist",
+    ".eslintrc.cjs",
+    "vite.config.ts",
+    "jest.config.ts",
+    "jest.setup.js",
+  ],
   parser: "@typescript-eslint/parser",
   parserOptions: {
     ecmaVersion: "latest",
@@ -53,6 +59,7 @@ module.exports = {
     "react/require-default-props": "off",
     "react/display-name": "off",
     "react-hooks/exhaustive-deps": "off",
+    "@typescript-eslint/no-unsafe-call": "off",
     semi: ["error", "always"],
   },
 };

@@ -24,6 +24,8 @@ function DetailsCard(): ReactElement {
           <p>Gender: {currentPerson.gender}</p>
           <p>Height: {currentPerson.height}</p>
           <p>Mass: {currentPerson.mass}</p>
+          <p>Eye color: {currentPerson.eye_color}</p>
+          <p>Hair color: {currentPerson.hair_color}</p>
           <button className={style.close} onClick={resetDetails}></button>
         </div>
       )}

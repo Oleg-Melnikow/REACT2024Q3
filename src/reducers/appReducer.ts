@@ -1,5 +1,5 @@
-import { GetPeopleData, People } from "interfaces/interface";
 import { createContext } from "react";
+import { GetPeopleData, People } from "../interfaces/interface";
 
 export interface AppStateType extends GetPeopleData {
   isLoading: boolean;
@@ -24,6 +24,7 @@ export const appReducer = (
     case "app/StarWars/SET-IS-LOADING":
     case "app/StarWars/GET-DATA-PEOPLE":
     case "app/StarWars/SET-CURRENT-PERSON":
+    case "app/StarWars/CHANGE-ISERROR":
       return {
         ...state,
         ...action.payload,

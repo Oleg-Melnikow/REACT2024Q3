@@ -10,14 +10,7 @@ interface CardProps {
 }
 
 function Card(props: CardProps): ReactElement {
-  const {
-    name,
-    birth_year: birthYear,
-    gender,
-    height,
-    mass,
-    url,
-  } = props.person;
+  const { name, birth_year: birthYear, gender, height, url } = props.person;
   const { getPerson } = useApp();
 
   const onClickCard = (): void => {
@@ -35,7 +28,6 @@ function Card(props: CardProps): ReactElement {
         <p>Birth year: {birthYear}</p>
         <p>Gender: {gender}</p>
         <p>Height: {height}</p>
-        <p>Mass: {mass}</p>
       </div>
       <div className={style.cardAction}>
         <Button onClick={onClickCard} title="More info" />
