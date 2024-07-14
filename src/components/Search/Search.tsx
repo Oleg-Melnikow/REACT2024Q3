@@ -1,23 +1,30 @@
 import { ChangeEvent, ReactElement, useEffect, useState } from "react";
+import { useSearchParams } from "react-router-dom";
+import useApp from "hooks/useApp";
 import style from "./Search.module.scss";
 import Button from "../Button/Button.tsx";
 
-interface SearchProps {
-  getItems: (search?: string) => Promise<void>;
-  onError: () => void;
-}
-
-function Search({ getItems, onError }: SearchProps): ReactElement {
+function Search(): ReactElement {
+  const { setIsError } = useApp();
   const [searchValue, setSearchValue] = useState("");
+  const [searchParams, setSearchParams] = useSearchParams();
 
   const searchInput = (): void => {
     const search = searchValue.trim();
     localStorage.setItem("search", search);
-    getItems(search);
+
+    const querySearch = searchParams.get("search") !== searchValue;
+    if (querySearch) {
+      setSearchParams({ search });
+    }
   };
 
   const onChangeInput = (event: ChangeEvent<HTMLInputElement>): void => {
     setSearchValue(event.target.value);
+  };
+
+  const onChnageError = (): void => {
+    setIsError(true);
   };
 
   useEffect(() => {
@@ -41,7 +48,7 @@ function Search({ getItems, onError }: SearchProps): ReactElement {
           title="Search"
           isDisabled={!searchValue.length}
         />
-        <Button onClick={onError} title="Error" />
+        <Button onClick={onChnageError} title="Error" />
       </div>
     </header>
   );

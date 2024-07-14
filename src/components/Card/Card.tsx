@@ -22,13 +22,11 @@ function Card(props: CardProps): ReactElement {
         <h4 className={style.cardTitlte}>{name}</h4>
       </div>
       <div className={style.cardBody}>
-        <div>
-          <p>Birth year: {birthYear}</p>
-          <p>Gender: {gender}</p>
-          <p>Height: {height}</p>
-          <p>Mass: {mass}</p>
-          <p>Skin color: {skinColor}</p>
-        </div>
+        <p>Birth year: {birthYear}</p>
+        <p>Gender: {gender}</p>
+        <p>Height: {height}</p>
+        <p>Mass: {mass}</p>
+        <p>Skin: {skinColor}</p>
       </div>
     </div>
   );

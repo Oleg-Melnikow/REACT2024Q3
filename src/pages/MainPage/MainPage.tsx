@@ -1,59 +1,32 @@
-import { ReactElement, useEffect, useState } from "react";
-import { ResultPeoople, People } from "interfaces/interface";
-import { searchAPI } from "api/api";
+import { ReactElement, useEffect } from "react";
 import Search from "components/Search/Search";
 import Loader from "components/Loader/Loader";
 import ContentBlock from "components/ContentBlock/ContentBlock";
-
-interface StateApp {
-  people: People[];
-  loading: boolean;
-  error: boolean;
-}
-
-const initialState: StateApp = {
-  people: [],
-  loading: true,
-  error: false,
-};
+import { useLocation, useSearchParams } from "react-router-dom";
+import useApp from "hooks/useApp";
 
 function MainPage(): ReactElement {
-  const [state, setState] = useState(initialState);
-  const [loading, setLoading] = useState(false);
-
-  const getItems = async (search?: string): Promise<void> => {
-    setLoading(true);
-    try {
-      const result = search
-        ? await searchAPI.searchItems(search)
-        : await searchAPI.getItems();
-      const { results } = result.data as ResultPeoople;
-      setState((prev) => ({ ...prev, people: results }));
-    } catch (e) {
-      console.log(e);
-    } finally {
-      setLoading(false);
-    }
-  };
+  const { search } = useLocation();
+  const [searchParams, setSearchParams] = useSearchParams();
+  const { getItems, isLoading, isError } = useApp();
 
   useEffect(() => {
     const item = localStorage.getItem("search") ?? "";
-    getItems(item);
-  }, []);
+    if (item && !searchParams.size) {
+      setSearchParams({ search: item });
+    }
+    getItems(search || `?search=${item}` || "");
+  }, [getItems, search, searchParams.size, setSearchParams]);
 
-  const onError = (): void => {
-    setState((prev) => ({ ...prev, error: true }));
-  };
-
-  if (state.error) {
+  if (isError) {
     throw new Error("App was crashed!");
   }
 
   return (
     <>
-      <Search getItems={getItems} onError={onError} />
-      <ContentBlock people={state.people} />
-      {loading && <Loader />}
+      <Search />
+      <ContentBlock />
+      {isLoading && <Loader />}
     </>
   );
 }

@@ -1,22 +1,24 @@
 import { ReactElement } from "react";
-import { People } from "interfaces/interface";
+import useApp from "hooks/useApp";
 import Card from "../Card/Card.tsx";
 import NotContent from "../NotContent/NotContent.tsx";
 import style from "./ContentBlock.module.scss";
+import Pagination from "../Pagination/Pagination.tsx";
 
-interface ContentProps {
-  people: People[];
-}
+function ContentBlock(): ReactElement {
+  const { count, people, isPagination } = useApp();
 
-function ContentBlock({ people }: ContentProps): ReactElement {
   return (
     <main className={style.content}>
       {people.length ? (
-        <div className={style.items}>
-          {people.map((person) => (
-            <Card key={person.name} person={person} />
-          ))}
-        </div>
+        <>
+          {isPagination && <Pagination count={count} />}
+          <div className={style.items}>
+            {people.map((person) => (
+              <Card key={person.name} person={person} />
+            ))}
+          </div>
+        </>
       ) : (
         <NotContent />
       )}
