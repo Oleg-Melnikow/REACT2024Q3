@@ -21,3 +21,9 @@ export interface People {
   starships: string[];
   species: string[];
 }
+
+export interface GetPeopleData {
+  people: People[];
+  count: number;
+  isPagination: boolean;
+}
