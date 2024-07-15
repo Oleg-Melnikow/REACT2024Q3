@@ -1,0 +1,60 @@
+@use "src/index" as main;
+
+.container {
+  height: 100vh;
+  @include main.flex;
+  background: #151515;
+}
+
+.container .content {
+  max-width: 600px;
+  height: 100%;
+  @include main.flex;
+  flex-direction: column;
+  text-align: center;
+  padding: 0 10px;
+  color: #ffffff;
+
+  .image {
+    width: 100%;
+    img {
+      width: inherit;
+    }
+  }
+
+  h2 {
+    font-size: 1.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+  }
+
+  h2,
+  p {
+    margin: 0;
+    padding-top: 15px;
+    line-height: 2.25rem;
+  }
+
+  p {
+    color: #fff;
+    font-size: 1.5rem;
+    font-weight: 500;
+  }
+
+  a {
+    @include main.flex;
+    padding: 10px 30px;
+    background: #ffffff;
+    color: #151515;
+    margin-top: 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none;
+    font-weight: bold;
+    transition: 0.5s ease-in;
+    &:hover {
+      transition: 0.5s ease-in;
+      opacity: 0.7;
+    }
+  }
+}

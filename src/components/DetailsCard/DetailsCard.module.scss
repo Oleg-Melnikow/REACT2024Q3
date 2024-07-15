@@ -1,0 +1,56 @@
+.detailsBlock {
+  width: 50%;
+  min-height: 100vh;
+  padding: 60px 10px 10px;
+  box-sizing: border-box;
+}
+
+.detailsCard {
+  width: 100%;
+  position: relative;
+  height: max-content;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: #fff;
+  border-radius: 5px;
+  gap: 5px;
+  padding: 5px;
+  box-sizing: border-box;
+  h2,
+  p {
+    margin: 0;
+  }
+}
+
+.close {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: none;
+  background: red;
+  &::before,
+  &::after {
+    position: absolute;
+    top: 9px;
+    left: 2.5px;
+    content: "";
+    width: 15px;
+    height: 2px;
+    background: #fff;
+  }
+  &::before {
+    transform: rotate(45deg);
+  }
+  &::after {
+    transform: rotate(-45deg);
+  }
+  &:hover {
+    cursor: pointer;
+    opacity: 0.7;
+  }
+}

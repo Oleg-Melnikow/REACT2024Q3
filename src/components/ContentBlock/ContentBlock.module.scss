@@ -1,0 +1,17 @@
+@use "src/index" as main;
+
+.content {
+  width: 100%;
+  min-height: calc(100vh - 60px);
+  background-color: #222;
+}
+
+.items {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 10px;
+  @include main.flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 10px;
+}

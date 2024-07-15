@@ -1,0 +1,19 @@
+@use "src/index" as main;
+
+.notFound {
+  width: 50%;
+  margin: 0 auto;
+  @include main.flex;
+  border-radius: 15px;
+  padding: 1rem;
+  font-size: 1.25rem;
+  background: rgba(11, 11, 11, 0.5);
+  gap: 5px;
+  img {
+    height: 30px;
+  }
+  p {
+    color: #ffc107;
+    margin: 0;
+  }
+}
